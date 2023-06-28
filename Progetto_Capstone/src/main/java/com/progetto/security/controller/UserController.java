@@ -26,11 +26,6 @@ public class UserController {
 		return ResponseEntity.ok(service.getById(id));
 	}
 	
-	@PostMapping
-	public ResponseEntity<?> save(@RequestBody User u) {
-		return ResponseEntity.ok(service.create(u));
-	}
-
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody User u) {
 		return ResponseEntity.ok(service.update(id, u));

@@ -27,6 +27,9 @@ public class ArticoloService {
 	}
 	
 	public Articolo create (Articolo s) {
+		if(repo.existsByNome(s.getNome())) {
+			throw new EntityExistsException("Articolo già esistente!!");
+		}
 		return repo.save(s);
 	}
 	
@@ -44,5 +47,4 @@ public class ArticoloService {
 		repo.deleteById(id);
 		return "Articolo eliminato!!";
 	}
-
 }

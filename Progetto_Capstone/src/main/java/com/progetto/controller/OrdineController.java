@@ -2,6 +2,7 @@ package com.progetto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,16 +28,19 @@ public class OrdineController {
 	}
 
 	@PostMapping
+	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<?> save(@RequestBody OrdineDTO a) {
 		return ResponseEntity.ok(service.create(a));
 	}
 
 	@PutMapping("/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Ordine a) {
 		return ResponseEntity.ok(service.update(id, a));
 	}
 
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<?> removeById(@PathVariable Long id) {
 		return ResponseEntity.ok(service.delete(id));
 	}

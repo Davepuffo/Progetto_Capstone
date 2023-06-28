@@ -13,8 +13,6 @@ import com.progetto.security.payload.LoginDto;
 import com.progetto.security.payload.RegisterDto;
 import com.progetto.security.service.AuthService;
 
-
-
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "*")

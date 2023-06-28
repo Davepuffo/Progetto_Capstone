@@ -26,10 +26,6 @@ public class UserService {
 		return repo.findById(id).get();
 	}
 	
-	public User create (User s) {
-		return repo.save(s);
-	}
-	
 	public User update (Long id, User s) {
 		if(!repo.existsById(id)) {
 			throw new EntityExistsException("Utente non esistente!!");

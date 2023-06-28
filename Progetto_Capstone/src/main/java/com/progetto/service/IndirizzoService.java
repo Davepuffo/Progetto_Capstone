@@ -34,6 +34,21 @@ public class IndirizzoService {
 	}
 	
 	public Indirizzo create (IndirizzoDTO DTO) {
+		User u = repoUser.findByUsername(DTO.getUser()).get();
+		List<Indirizzo> indirizzoUtente = u.getIndirizziUtente();
+		if (indirizzoUtente.size() > 4) {
+			throw new EntityExistsException("Hai già 4 indirizzi registrati, modificane uno!");
+		}
+//		if(indirizzoUtente.size() == 2) {
+//			throw new EntityExistsException("Hai già");
+//		}
+//		for (Indirizzo indirizzo : indirizzoUtente) {
+//			Boolean flag = indirizzo.getTipo() == TipoIndirizzo.;
+//			if (flag && i.size() == 2) {
+//				throw new MyAPIException(HttpStatus.NOT_ACCEPTABLE,
+//						"Hai inserito sede unica non puoi avere piu di 2 indirizzi");
+//			}
+//		}
 		Indirizzo i = new Indirizzo();
 		i.setCitta(DTO.getCitta());
 		i.setCivico(DTO.getCivico());
@@ -42,8 +57,6 @@ public class IndirizzoService {
 		i.setUser(repoUser.findByUsername(DTO.getUser()).get());
 		i.setVia(DTO.getVia());
 		repo.save(i);
-		User u = repoUser.findByUsername(DTO.getUser()).get();
-		List<Indirizzo> indirizzoUtente = u.getIndirizziUtente();
 		indirizzoUtente.add(i);
 		serviceUser.update(u.getId(), u);
 		return i;

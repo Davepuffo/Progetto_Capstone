@@ -28,4 +28,10 @@ public class Role {
 
 	@Enumerated(EnumType.STRING)
 	private ERole roleName;
+
+	public Role(ERole roleName) {
+		super();
+		this.roleName = roleName;
+	}
+	
 }

@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.progetto.interfaces.StatoOrdine;
 import com.progetto.model.Fattura;
+import com.progetto.model.Ordine;
 import com.progetto.payload.FatturaDTO;
 import com.progetto.repository.FatturaRepository;
 import com.progetto.repository.OrdineRepository;
@@ -30,18 +32,12 @@ public class FatturaService {
 		return repo.findById(id).get();
 	}
 	
-	public Fattura create (FatturaDTO s) {
+	public Fattura create (Long id) {
+		Ordine o = repoOrdine.findById(id).get();
 		Fattura f = new Fattura();
 		f.setData(LocalDate.now());
-		f.setOrdine(repoOrdine.findById(s.getId_ordine()).get());
+		f.setOrdine(o);
 		return repo.save(f);
-	}
-	
-	public Fattura update (Long id, Fattura s) {
-		if(!repo.existsById(id)) {
-			throw new EntityExistsException("Fattura non esistente!!");
-		}
-		return repo.save(s);
 	}
 	
 	public String delete (Long id) {

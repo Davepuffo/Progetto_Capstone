@@ -59,5 +59,6 @@ public class User {
 	List<Indirizzo> indirizziUtente;
 	
 	@OneToMany
+	@JsonIgnore
 	List<Ordine> ordiniEffettuati;
 }
