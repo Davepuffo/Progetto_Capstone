@@ -37,7 +37,7 @@ public class IndirizzoService {
 		User u = repoUser.findByUsername(DTO.getUser()).get();
 		List<Indirizzo> indirizzoUtente = u.getIndirizziUtente();
 		if (indirizzoUtente.size() > 4) {
-			throw new EntityExistsException("Hai già 4 indirizzi registrati, modificane uno!");
+			throw new EntityExistsException("Hai già 4 indirizzi registrati, modificane uno per procedere!");
 		}
 //		if(indirizzoUtente.size() == 2) {
 //			throw new EntityExistsException("Hai già");

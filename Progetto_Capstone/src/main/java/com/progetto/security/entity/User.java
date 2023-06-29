@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.progetto.model.Fattura;
 import com.progetto.model.Indirizzo;
 import com.progetto.model.Ordine;
 
@@ -56,9 +56,14 @@ public class User {
 	private Set<Role> roles = new HashSet<>();
 	
 	@OneToMany
+	@JoinTable(name = "indirizzi_user", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "indirizzo_id", referencedColumnName = "id"))
 	List<Indirizzo> indirizziUtente;
 	
 	@OneToMany
-	@JsonIgnore
+	@JoinTable(name = "ordini_user", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ordine_id", referencedColumnName = "id"))
 	List<Ordine> ordiniEffettuati;
+	
+	@OneToMany
+	@JoinTable(name = "fatture_user", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "fattura_id", referencedColumnName = "id"))
+	List<Fattura> fattureRicevute;
 }

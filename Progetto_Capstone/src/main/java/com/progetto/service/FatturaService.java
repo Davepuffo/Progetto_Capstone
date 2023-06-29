@@ -12,6 +12,9 @@ import com.progetto.model.Ordine;
 import com.progetto.payload.FatturaDTO;
 import com.progetto.repository.FatturaRepository;
 import com.progetto.repository.OrdineRepository;
+import com.progetto.security.entity.User;
+import com.progetto.security.repository.UserRepository;
+import com.progetto.security.service.UserService;
 
 import jakarta.persistence.EntityExistsException;
 
@@ -20,6 +23,8 @@ public class FatturaService {
 	
 	@Autowired FatturaRepository repo;
 	@Autowired OrdineRepository repoOrdine;
+	@Autowired UserRepository repoUser;
+	@Autowired UserService serviceUser;
 	
 	public List<Fattura> getAll(){
 		return repo.findAll();
@@ -34,10 +39,15 @@ public class FatturaService {
 	
 	public Fattura create (Long id) {
 		Ordine o = repoOrdine.findById(id).get();
+		User u = o.getUser();
+		List<Fattura> fattureUser = u.getFattureRicevute();
 		Fattura f = new Fattura();
 		f.setData(LocalDate.now());
 		f.setOrdine(o);
-		return repo.save(f);
+		repo.save(f);
+		fattureUser.add(f);
+		serviceUser.update(u.getId(), u);
+		return f;
 	}
 	
 	public String delete (Long id) {

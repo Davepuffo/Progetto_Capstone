@@ -57,13 +57,13 @@ public class JwtTokenProvider {
 			Jwts.parserBuilder().setSigningKey(key()).build().parse(token);
 			return true;
 		} catch (MalformedJwtException ex) {
-			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Invalid JWT token");
+			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Token JWT non valido");
 		} catch (ExpiredJwtException ex) {
-			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Expired JWT token");
+			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Token JWT scaduto");
 		} catch (UnsupportedJwtException ex) {
-			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Unsupported JWT token");
+			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Token JWT non supportato");
 		} catch (IllegalArgumentException ex) {
-			throw new MyAPIException(HttpStatus.BAD_REQUEST, "JWT claims string is empty.");
+			throw new MyAPIException(HttpStatus.BAD_REQUEST, "La stringa passata è vuota");
 		}
 	}
 }

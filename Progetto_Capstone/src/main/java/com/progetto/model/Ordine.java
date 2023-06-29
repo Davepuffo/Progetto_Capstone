@@ -44,6 +44,7 @@ public class Ordine {
 	private String pagamento;
 	
 	@ManyToOne
+	@JsonIgnore
 	private User user;
 	
 	@OneToMany

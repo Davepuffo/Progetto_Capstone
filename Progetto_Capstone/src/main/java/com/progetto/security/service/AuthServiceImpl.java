@@ -57,14 +57,14 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public String register(RegisterDto registerDto) {
 
-		// add check for username exists in database
+		// verifica username nel db
 		if (userRepository.existsByUsername(registerDto.getUsername())) {
-			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Username is already exists!.");
+			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Username già utilizzato!");
 		}
 
-		// add check for email exists in database
+		// verifica email nel db
 		if (userRepository.existsByEmail(registerDto.getEmail())) {
-			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Email is already exists!.");
+			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Email già utilizzata!");
 		}
 
 		User user = new User();
@@ -91,7 +91,7 @@ public class AuthServiceImpl implements AuthService {
 		userRepository.save(user);
 		System.out.println(user);
 
-		return "User registered successfully!.";
+		return "Utente registrato con successo!";
 	}
 
 	public ERole getRole(String role) {
