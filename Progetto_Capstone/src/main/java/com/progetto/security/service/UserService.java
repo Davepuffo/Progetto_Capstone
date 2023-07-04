@@ -19,11 +19,11 @@ public class UserService {
 		return repo.findAll();
 	}
 	
-	public User getById (Long id) {
-		if(!repo.existsById(id)) {
+	public User getByUsername (String username) {
+		if(!repo.existsByUsername(username)) {
 			throw new EntityExistsException("Utente non esistente!!");
 		}
-		return repo.findById(id).get();
+		return repo.findByUsername(username).get();
 	}
 	
 	public User update (Long id, User s) {

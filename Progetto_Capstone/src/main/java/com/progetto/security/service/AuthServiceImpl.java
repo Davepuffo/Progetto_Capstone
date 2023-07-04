@@ -76,17 +76,18 @@ public class AuthServiceImpl implements AuthService {
 		Set<String> roleUtente = registerDto.getRoles();
 		Set<Role> roles = new HashSet<>();
 		
-		for(String role : roleUtente ) {
-			ERole e = getRole(role);
-			Role r = roleRepository.findByRoleName(e).get();
-			roles.add(r);
-		}
-		user.setRoles(roles);
-
 		if (registerDto.getRoles() == null) {
-				Role userRole = roleRepository.findByRoleName(ERole.ROLE_USER).get();
-				roles.add(userRole);
+			Role userRole = roleRepository.findByRoleName(ERole.ROLE_USER).get();
+			roles.add(userRole);
+		} else {
+			for(String role : roleUtente ) {
+				ERole e = getRole(role);
+				Role r = roleRepository.findByRoleName(e).get();
+				roles.add(r);
+			}			
 		}
+		
+		user.setRoles(roles);
 				
 		userRepository.save(user);
 		System.out.println(user);

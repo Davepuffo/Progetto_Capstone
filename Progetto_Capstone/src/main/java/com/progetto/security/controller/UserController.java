@@ -2,6 +2,7 @@ package com.progetto.security.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +18,14 @@ import com.progetto.security.service.UserService;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "*", maxAge = 360000)
 public class UserController {
 
 	@Autowired private UserService service;
 
-	@GetMapping("/{id}")
-	public ResponseEntity<?> get(@PathVariable Long id) {
-		return ResponseEntity.ok(service.getById(id));
+	@GetMapping("/{username}")
+	public ResponseEntity<?> get(@PathVariable String username) {
+		return ResponseEntity.ok(service.getByUsername(username));
 	}
 	
 	@PutMapping("/{id}")

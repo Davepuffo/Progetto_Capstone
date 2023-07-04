@@ -1,5 +1,8 @@
 package com.progetto.model;
 
+import com.progetto.interfaces.TipoAnimale;
+import com.progetto.interfaces.TipoArticolo;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,14 +25,24 @@ public class Articolo {
 	private Long id;
 	@Column (nullable = false, unique = true)
 	private String nome;
+	@Column (nullable = false)
+	private String foto;
 	private String descrizione;
 	@Column (nullable = false)
 	private Double prezzo;
+	@Column (nullable = false)
+	private TipoArticolo tipo;
+	@Column (nullable = false)
+	private TipoAnimale animale;
+	
 
 //	{
-//		"nome" : "scatolsdfghjka",
-//		"descrizione" : "da 10kg",
-//		"prezzo": 178.09
+//		"nome" : "Monge All Breeds Adult Salmone e Riso",
+//		"foto" : "https://arcaplanet.vtexassets.com/arquivos/ids/270797-1800-1800/Monge-All-Breeds-Adult-Salmone-e-Riso-12Kg.jpg?v=1774881573&quality=1&width=1800&height=1800",
+//        "descrizione" : "da 10kg",
+//		"prezzo": 48.9,
+//        "tipo" : "ALIMENTAZIONE",
+//        "animale" : "CANE"
 //	}
 	
 	
