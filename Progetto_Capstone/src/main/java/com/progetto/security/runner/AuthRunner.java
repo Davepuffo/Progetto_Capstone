@@ -52,14 +52,14 @@ public class AuthRunner implements ApplicationRunner {
 			RegisterDto registerDto = new RegisterDto().builder().name("Davide").lastname("Galli")
 					.username("davideg").email("davy@example.com").password("prova1234").roles(roles).build();
 			auth.register(registerDto);
-
-//			LoginDto loginDto = new LoginDto().builder().username("davideg").password("prova1234").build();
-//			auth.login(loginDto);
-		} else {
-//			LoginDto loginDto = new LoginDto().builder().username("davideg").password("prova1234").build();
-//			auth.login(loginDto);
 		}
 
+//			LoginDto loginDto = new LoginDto().builder().username("davideg").password("prova1234").build();
+//			auth.login(loginDto);
+//		} else {
+//			LoginDto loginDto = new LoginDto().builder().username("davideg").password("prova1234").build();
+//			auth.login(loginDto);
+//		}
 	}
 
 	private void setRoleDefault() {
