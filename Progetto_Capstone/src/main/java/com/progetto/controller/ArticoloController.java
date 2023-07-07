@@ -17,15 +17,15 @@ import com.progetto.model.Articolo;
 import com.progetto.service.ArticoloService;
 
 @RestController
-@RequestMapping("/articolo")
+@RequestMapping("/catalogo/articolo")
 @CrossOrigin(origins = "*", maxAge = 360000)
 public class ArticoloController {
 
 	@Autowired private ArticoloService service;
 
-	@GetMapping("/{id}")
-	public ResponseEntity<?> get(@PathVariable Long id) {
-		return ResponseEntity.ok(service.getById(id));
+	@GetMapping("/{type}/{id}")
+	public ResponseEntity<?> get(@PathVariable String type, @PathVariable Long id) {
+		return ResponseEntity.ok(service.get(type,id));
 	}
 
 	@PostMapping
