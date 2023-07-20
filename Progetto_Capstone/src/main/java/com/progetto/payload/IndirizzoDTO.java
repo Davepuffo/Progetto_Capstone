@@ -24,6 +24,7 @@ public class IndirizzoDTO {
 	private String civico;
 	private String citta;
 	private String provincia;
+	private Integer cap;
 	private TipoIndirizzo tipo;
 	private String user;
 }

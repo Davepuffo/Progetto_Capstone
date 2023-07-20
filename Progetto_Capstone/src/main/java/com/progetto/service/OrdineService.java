@@ -2,6 +2,8 @@ package com.progetto.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,9 +89,16 @@ public class OrdineService {
 		if(o.getStato() == StatoOrdine.CONSEGNATO || o.getStato() == StatoOrdine.IN_TRANSITO || o.getStato() == StatoOrdine.IN_PREPARAZIONE) {
 			return "L'ordine è stato evaso e non può essere cancellato";
 		} else {
+			List<Ordine> lo = o.getUser().getOrdiniEffettuati();
+			for(Ordine o1 : lo) {
+				if(o1 == o) {
+					lo.remove(o);
+				}
+			}
 			repo.deleteById(id);
 			return "Ordine eliminato con successo!";
 		}
+		
 	}
 
 }

@@ -15,6 +15,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -34,7 +36,7 @@ public class Ordine {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	@Column (nullable = false)
 	private LocalDate data;
 	@Enumerated(EnumType.STRING)
@@ -47,7 +49,7 @@ public class Ordine {
 	@JsonIgnore
 	private User user;
 	
-	@OneToMany
+	@ManyToMany
 	List<Articolo> articoliOrdinati;
 	
 	@OneToOne (cascade = CascadeType.ALL)

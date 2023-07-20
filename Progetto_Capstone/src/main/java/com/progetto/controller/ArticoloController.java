@@ -24,7 +24,7 @@ public class ArticoloController {
 	@Autowired private ArticoloService service;
 
 	@GetMapping("/{type}/{id}")
-	public ResponseEntity<?> get(@PathVariable String type, @PathVariable Long id) {
+	public ResponseEntity<?> get(@PathVariable String type, @PathVariable String id) {
 		return ResponseEntity.ok(service.get(type,id));
 	}
 

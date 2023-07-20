@@ -19,7 +19,7 @@ public class ArticoloService {
 @Autowired ArticoloRepository repo;
 	
 	
-	public List<Articolo> get(String type, Long id) {
+	public List<Articolo> get(String type, String id) {
 		switch (type) {
 		case "cane":
 			TipoAnimale tipo = TipoAnimale.valueOf(type.toUpperCase());
@@ -46,11 +46,11 @@ public class ArticoloService {
 			if (repo.findByNome(id.toString()).isEmpty()) {
 				throw new EntityNotFoundException("Nessun risultato trovato!");
 			} else {
-				return repo.findByNome(id.toString());
+				return repo.findByNome(id);
 			}
 		case "id":
 			List<Articolo> l = new ArrayList<>();
-			l.add(repo.findById(id).get());
+			l.add(repo.findById(Long.valueOf(id)).get());
 			return l;
 		default:
 			return repo.findAll();

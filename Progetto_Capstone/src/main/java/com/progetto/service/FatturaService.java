@@ -54,6 +54,14 @@ public class FatturaService {
 		if(!repo.existsById(id)) {
 			throw new EntityExistsException("Fattura non esistente!!");
 		}
+		Fattura fa = repo.findById(id).get();
+		User u = repo.findById(id).get().getOrdine().getUser();
+		System.out.println(u);
+//		for (Fattura f1 : f) {
+//			if (f.contains(fa)) {
+//				f.remove(fa);				
+//			}
+//		}
 		repo.deleteById(id);
 		return "Fattura eliminata!!";
 	}

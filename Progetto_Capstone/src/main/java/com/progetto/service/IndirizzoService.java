@@ -3,12 +3,15 @@ package com.progetto.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.progetto.interfaces.TipoIndirizzo;
 import com.progetto.model.Indirizzo;
 import com.progetto.payload.IndirizzoDTO;
 import com.progetto.repository.IndirizzoRepository;
 import com.progetto.security.entity.User;
+import com.progetto.security.exception.MyAPIException;
 import com.progetto.security.repository.UserRepository;
 import com.progetto.security.service.UserService;
 
@@ -36,23 +39,14 @@ public class IndirizzoService {
 	public Indirizzo create (IndirizzoDTO DTO) {
 		User u = repoUser.findByUsername(DTO.getUser()).get();
 		List<Indirizzo> indirizzoUtente = u.getIndirizziUtente();
-		if (indirizzoUtente.size() > 4) {
-			throw new EntityExistsException("Hai già 4 indirizzi registrati, modificane uno per procedere!");
+		if (indirizzoUtente.size() > 2) {
+			throw new MyAPIException(HttpStatus.BAD_REQUEST, "Hai già inserito il massimo numero di indirizzi");
 		}
-//		if(indirizzoUtente.size() == 2) {
-//			throw new EntityExistsException("Hai già");
-//		}
-//		for (Indirizzo indirizzo : indirizzoUtente) {
-//			Boolean flag = indirizzo.getTipo() == TipoIndirizzo.;
-//			if (flag && i.size() == 2) {
-//				throw new MyAPIException(HttpStatus.NOT_ACCEPTABLE,
-//						"Hai inserito sede unica non puoi avere piu di 2 indirizzi");
-//			}
-//		}
 		Indirizzo i = new Indirizzo();
 		i.setCitta(DTO.getCitta());
 		i.setCivico(DTO.getCivico());
 		i.setProvincia(DTO.getProvincia());
+		i.setCap(DTO.getCap());
 		i.setTipo(DTO.getTipo());
 		i.setUser(repoUser.findByUsername(DTO.getUser()).get());
 		i.setVia(DTO.getVia());
@@ -70,6 +64,7 @@ public class IndirizzoService {
 		i.setCitta(DTO.getCitta());
 		i.setCivico(DTO.getCivico());
 		i.setProvincia(DTO.getProvincia());
+		i.setCap(DTO.getCap());
 		i.setTipo(DTO.getTipo());
 		i.setUser(repoUser.findByUsername(DTO.getUser()).get());
 		i.setVia(DTO.getVia());

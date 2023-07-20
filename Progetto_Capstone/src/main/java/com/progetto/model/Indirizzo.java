@@ -34,6 +34,8 @@ public class Indirizzo {
 	private String citta;
 	@Column (nullable = false)
 	private String provincia;
+	@Column (nullable = false)
+	private Integer cap;
 	@Enumerated(EnumType.STRING)
 	@Column (nullable = false)
 	private TipoIndirizzo tipo;
