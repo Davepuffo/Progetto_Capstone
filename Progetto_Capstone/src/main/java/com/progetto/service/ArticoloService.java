@@ -42,6 +42,20 @@ public class ArticoloService {
 			} else {
 				return repo.findByAnimale(tipo3);
 			}
+		case "uccelli":
+			TipoAnimale tipo4 = TipoAnimale.valueOf(type.toUpperCase());
+			if (repo.findByAnimale(tipo4).isEmpty()) {
+				throw new EntityNotFoundException("Nessun risultato trovato!");
+			} else {
+				return repo.findByAnimale(tipo4);
+			}
+		case "roditori":
+			TipoAnimale tipo5 = TipoAnimale.valueOf(type.toUpperCase());
+			if (repo.findByAnimale(tipo5).isEmpty()) {
+				throw new EntityNotFoundException("Nessun risultato trovato!");
+			} else {
+				return repo.findByAnimale(tipo5);
+			}
 		case "cerca":
 			if (repo.findByNome(id.toString()).isEmpty()) {
 				throw new EntityNotFoundException("Nessun risultato trovato!");

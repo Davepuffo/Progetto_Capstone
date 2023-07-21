@@ -1,5 +1,5 @@
 package com.progetto.interfaces;
 
 public enum TipoAnimale {
-CANE,GATTO,PESCI,
+CANE,GATTO,PESCI,UCCELLI,RODITORI
 }
