@@ -82,7 +82,14 @@ public class ArticoloService {
 		if(!repo.existsById(id)) {
 			throw new EntityExistsException("Articolo non esistente!!");
 		}
-		return repo.save(s);
+		Articolo a = repo.findById(id).get();
+		a.setAnimale(s.getAnimale());
+		a.setDescrizione(s.getDescrizione());
+		a.setFoto(s.getFoto());
+		a.setNome(s.getNome());
+		a.setPrezzo(s.getPrezzo());
+		a.setTipo(s.getTipo());
+		return repo.save(a);
 	}
 	
 	public String delete (Long id) {
